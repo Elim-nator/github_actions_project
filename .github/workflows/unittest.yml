@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  pull_requests:
+  pull_request:
     branches:
       - main
 
@@ -28,4 +28,4 @@ jobs:
           pip install -r requirements.txt
 #step4 : Run tests
       - name: Run tests
-        run: pytest 
+        run: pytest tests/ -v
