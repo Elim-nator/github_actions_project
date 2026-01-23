@@ -41,12 +41,13 @@ def test_float_inputs():
     assert add(2.5, 3.7) == 6.2
 
 # Parametrized tests (efficient!)
-@pytest.mark.parametrize("a, b, expected", [
-    (1, 1, 2.0),   # add
-    (8, 3, 5.0),   # subtract
-    (6, 7, 42.0),  # multiply
+@pytest.mark.parametrize("a, b, expected_add, expected_sub, expected_mul", [
+    (1, 1, 2.0, 0.0, 1.0),    # add=2, sub=0, mul=1
+    (8, 3, 11.0, 5.0, 24.0),  # add=11, sub=5, mul=24
+    (6, 7, 13.0, -1.0, 42.0), # add=13, sub=-1, mul=42
 ])
-def test_basic_operations(a, b, expected):
-    assert add(a, b) == expected
-    assert subtract(a + expected, b) == expected
-    assert multiply(a, expected) == expected
+def test_basic_operations(a, b, expected_add, expected_sub, expected_mul):
+    """Test add, subtract, multiply with same inputs."""
+    assert add(a, b) == expected_add
+    assert subtract(a, b) == expected_sub
+    assert multiply(a, b) == expected_mul
